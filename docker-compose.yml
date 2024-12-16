@@ -1,0 +1,16 @@
+---
+services:
+  proxy:
+    build:
+      context: .
+    ports:
+      - 443:443
+    environment:
+      BACKEND: nginx
+      DOMAIN: acme.com
+
+    volumes:
+      - ./setup-ssl-cert.sh:/docker-entrypoint.d/99-setup-ssl-cert.sh
+
+  nginx:
+    image: nginx:latest
